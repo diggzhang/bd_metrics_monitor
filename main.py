@@ -9,11 +9,10 @@ import subprocess
 from config import config
 
 urllib3.disable_warnings()
-bot_url = config(section='dingding')['bot']
-
-REPO_PATH = os.path.dirname(os.path.abspath(__file__)) + '/frontend_event_process'
-HOME_DIR = '/Users/xingzezhang/Work/bd_metrics_monitor/'
-MONGO_ALL_FIELDS = '/Users/xingzezhang/Work/bd_metrics_monitor/frontend_event_process/src/main/resources/all_fields.csv'
+BOT_URL = config(section='dingding')['bot']
+REPO_PATH = os.path.dirname(os.path.abspath(__file__)) + config(section='path')['repopath']
+HOME_DIR = config(section='path')['home']
+MONGO_ALL_FIELDS = config(section='path')['csv']
 
 
 def ls(path):
@@ -186,4 +185,4 @@ if __name__ == '__main__':
         "title": "fields",
         "text": "### 缺失字段列表 共计 " + str(len(item_list)) + " 个字段 \n " + txt
     }
-    dingding_bot(bot_url, warning_text)
+    dingding_bot(BOT_URL, warning_text)
